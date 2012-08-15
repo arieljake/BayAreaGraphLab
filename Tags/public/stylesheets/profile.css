@@ -1,0 +1,12 @@
+.field {
+	margin-top: 20px;
+}
+
+label {
+	font-weight: bold;
+}
+
+.examples {
+	font-size: smaller;
+	margin: 5px 0;
+}

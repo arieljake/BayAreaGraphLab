@@ -1,0 +1,32 @@
+{
+    "name": "bagl",
+    "children": [
+        {
+            "name": "people",
+            "children": [
+                {
+					"name": "Ariel",
+					"size": 1
+				},
+                {
+					"name": "Jay",
+					"size": 2
+				}
+            ]
+        },
+        {
+            "name": "products",
+            "children": [
+                {"name": "Neo4J", "size": 3},
+                {"name": "Titan", "size": 1}
+            ]
+        },
+		{
+			"name": "bagl",
+			"children": [
+				{"name": "Same color, eh?", "size": 1.5},
+				{"name": "Nope", "size": 1.5}
+			]
+		}
+            ]
+}
