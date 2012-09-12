@@ -1,0 +1,25 @@
+{
+    "fieldsets" : [
+		{
+			"name" : "BAGL Member Graph",
+			"fields" : [
+				{
+					"id" : "academicFocus",
+					"label" : "Graph-Relevant Experience and Skills"
+				},
+				{
+					"id" : "product",
+					"label" : "Graph Products Familiar With"
+				},
+				{
+					"id" : "interest",
+					"label" : "Graph Ecosystem Interest Areas"
+				},
+				{
+					"id" : "idea",
+					"label" : "Graph Project Ideas"
+				}
+			]
+		}
+    ]
+}

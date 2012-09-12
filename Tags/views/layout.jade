@@ -1,0 +1,64 @@
+doctype 5
+html
+  head
+    title #{title}
+    meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width,initial-scale=1.0")
+    meta(name="description",content="")
+    meta(name="author",content="")
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/stylesheets/syntax.css")
+    link(rel="stylesheet", href="/stylesheets/bootstrap/bootstrap.css")
+    link(rel="stylesheet", href="/stylesheets/bootstrap/bootstrap-responsive.css")
+    link(rel="stylesheet", href="/stylesheets/jquery-ui-1.8.21.custom.css")
+    link(rel="shortcut icon", href="/images/favicon.ico")
+    link(rel="apple-touch-icon-precomposed", href="/images/bootstrap/apple-touch-icon-57-precomposed.png")
+    link(rel="apple-touch-icon-precomposed", href="/images/bootstrap/apple-touch-icon-72-precomposed.png", sizes="72x72")
+    link(rel="apple-touch-icon-precomposed", href="/images/bootstrap/apple-touch-icon-114-precomposed.png", sizes="114x114")
+    link(rel="apple-touch-icon-precomposed", href="/images/bootstrap/apple-touch-icon-144-precomposed.png", sizes="144x144")
+
+    script(type="text/javascript", src="http://html5shim.googlecode.com/svn/trunk/html5.js")
+    script(type="text/javascript", src="/javascripts/underscore-min.js")
+    script(type="text/javascript", src="/javascripts/underscore.string.js")
+    script(type="text/javascript", src="/javascripts/jquery-1.7.2.min.js")
+    script(type="text/javascript", src="/javascripts/jquery-ui-1.8.21.custom.min.js")
+    script(type="text/javascript", src="/javascripts/d3.v2.js")
+    script
+      var navLinks = [{ href:"/v/data", text: "Data" },{ href: "/v/members", text: "Members"},{ href: "/v/tags", text: "Tags" },{ href: "/v/circles", text: "Circles" }];
+
+      $(document).ready(function()
+      {
+        navLinks.forEach(function(navLink)
+              {
+                $("ul.nav").append("<li " + (window.location.href.indexOf(navLink.href) >= 0 ? "class='active'" : "") + "><a href='" + navLink.href + "'>" + navLink.text + "</a></li>");
+              });
+      });
+
+  body
+
+    div(class="navbar navbar-fixed-top")
+        div(class="navbar-inner")
+          div(class="container")
+            a(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
+              span(class="icon-bar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+            a(class="brand",href="/") #{title}
+            div(class="nav-collapse")
+              ul(class="nav")
+
+    block content
+
+  script(src="/javascripts/bootstrap/bootstrap-transition.js")
+  script(src="/javascripts/bootstrap/bootstrap-alert.js")
+  script(src="/javascripts/bootstrap/bootstrap-modal.js")
+  script(src="/javascripts/bootstrap/bootstrap-dropdown.js")
+  script(src="/javascripts/bootstrap/bootstrap-scrollspy.js")
+  script(src="/javascripts/bootstrap/bootstrap-tab.js")
+  script(src="/javascripts/bootstrap/bootstrap-tooltip.js")
+  script(src="/javascripts/bootstrap/bootstrap-popover.js")
+  script(src="/javascripts/bootstrap/bootstrap-button.js")
+  script(src="/javascripts/bootstrap/bootstrap-collapse.js")
+  script(src="/javascripts/bootstrap/bootstrap-carousel.js")
+  script(src="/javascripts/bootstrap/bootstrap-typeahead.js")

@@ -3,6 +3,8 @@
  * Module dependencies.
  */
 
+var util = require("util");
+var spawn = require("child_process").spawn;
 var express = require('express')
 	, routes = require('./routes')
 	, http = require('http')
@@ -30,7 +32,34 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/createNodes', routes.createNodes);
 
 http.createServer(app).listen(app.get('port'), function(){
+
+	// startNeo4J();
+
 	console.log("Express server listening on port " + app.get('port'));
 });
+
+
+function startNeo4J()
+{
+	startProgram(["start"],"/Users/arieljake/Downloads/Neo4J/neo4j-community-1.8.M04/bin/neo4j");
+}
+
+var noRestartOn = null;
+var crash_queued = false;
+
+function startProgram (prog, exec)
+{
+	util.debug("Starting child process with '" + exec + " " + prog.join(" ") + "'");
+	crash_queued = false;
+
+	var child = exports.child = spawn(exec, prog);
+	child.stdout.addListener("data", function (chunk) { chunk && util.print(chunk); });
+	child.stderr.addListener("data", function (chunk) { chunk && util.debug(chunk); });
+	child.addListener("exit", function (code)
+	{
+
+	});
+}

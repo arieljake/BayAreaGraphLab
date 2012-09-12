@@ -17,3 +17,8 @@ exports.index = function(req, res)
 {
   	res.render('index', { title: title});
 };
+
+exports.createNodes = function(req,res)
+{
+	res.render('createNodes', {title: title});
+}

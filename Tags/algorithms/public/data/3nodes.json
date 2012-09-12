@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"name":"u1","id":0,"group":1},
+		{"name":"v1","id":1,"group":1},
+		{"name":"w1","id":2,"group":1},
+		{"name":"u2","id":3,"group":2},
+		{"name":"v2","id":4,"group":2}
+	]
+	,"links":[
+		{"source":0,"target":1,"value":1},
+		{"source":1,"target":2,"value":1},
+		{"source":3,"target":4,"value":1}
+	]
+}
