@@ -1,0 +1,50 @@
+doctype 5
+html
+  head
+    title #{title}
+    meta(charset="utf-8")
+    meta(name="viewport",content="width=device-width,initial-scale=1.0")
+    meta(name="description",content="")
+    meta(name="author",content="")
+
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel="stylesheet", href="/css/syntax.css")
+    link(rel="stylesheet", href="/css/external/bootstrap/bootstrap.css")
+    link(rel="stylesheet", href="/css/external/bootstrap/bootstrap-responsive.css")
+    link(rel="stylesheet", href="/css/external/jquery-ui-1.8.21.custom.css")
+    link(rel="shortcut icon", href="/images/favicon.ico")
+
+    script(type="text/javascript", src="http://html5shim.googlecode.com/svn/trunk/html5.js")
+    script(type="text/javascript", src="/js/external/underscore-min.js")
+    script(type="text/javascript", src="/js/external/underscore.string.js")
+    script(type="text/javascript", src="/js/external/jquery-1.7.2.min.js")
+    script(type="text/javascript", src="/js/external/jquery-ui-1.8.21.custom.min.js")
+    script(type="text/javascript", src="/js/external/d3.v2.js")
+
+  body
+
+    div(class="navbar navbar-fixed-top")
+        div(class="navbar-inner")
+          div(class="container")
+            a(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
+              span(class="icon-bar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+            a(class="brand",href="/") #{title}
+            div(class="nav-collapse")
+              ul(class="nav")
+
+    block content
+
+  script(src="/js/external/bootstrap/bootstrap-transition.js")
+  script(src="/js/external/bootstrap/bootstrap-alert.js")
+  script(src="/js/external/bootstrap/bootstrap-modal.js")
+  script(src="/js/external/bootstrap/bootstrap-dropdown.js")
+  script(src="/js/external/bootstrap/bootstrap-scrollspy.js")
+  script(src="/js/external/bootstrap/bootstrap-tab.js")
+  script(src="/js/external/bootstrap/bootstrap-tooltip.js")
+  script(src="/js/external/bootstrap/bootstrap-popover.js")
+  script(src="/js/external/bootstrap/bootstrap-button.js")
+  script(src="/js/external/bootstrap/bootstrap-collapse.js")
+  script(src="/js/external/bootstrap/bootstrap-carousel.js")
+  script(src="/js/external/bootstrap/bootstrap-typeahead.js")
