@@ -1,0 +1,1 @@
+{"query": "start x  = node(79,80,81,82,83,84,85,86,87) match x-[r1]->y-[r2]->z where x.selected = {isSelected} and y.selected = {isSelected} and z.selected = {isSelected} and x.index <> z.index and type(r1) = type(r2) return x.index,type(r1),y.index,type(r2),z.index","params": {"isSelected" : "true"}}

@@ -1,0 +1,12 @@
+{
+  "order" : "depth_first",
+  "max_depth" : 2,
+  "prune_evaluator" : {
+    "body" : "position.endNode().getProperty('selected').toString() == 'false'",
+    "language" : "javascript"
+  },
+  "return_filter" : {
+    "body" : "position.length() == 2 && position.endNode().getProperty('selected').toString() == 'true' && ((Math.abs(position.endNode().getProperty('index') - position.startNode().getProperty('index')) == 2) || (Math.abs(position.endNode().getProperty('index') - position.startNode().getProperty('index')) == 6))",
+    "language" : "javascript"
+  }
+}

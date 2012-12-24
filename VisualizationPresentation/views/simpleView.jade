@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div#myView
+
+  - jsonVal = "var viewParams = " + JSON.stringify(params) + ";";
+
+  script
+    !{jsonVal}
+
+  include simpleView.html

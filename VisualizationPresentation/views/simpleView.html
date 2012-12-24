@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+	var viewId = viewParams.viewId;
+	var viewFile = viewParams.viewFile;
+	var viewVarName = viewId.charAt(0).toUpperCase() + viewId.slice(1) + "View";
+
+	require(RequireImports.new()
+		.add("/views/" + viewId, [viewFile])
+		.toArray(), function()
+	{
+		if (window.curMovie == undefined)
+		{
+			var styleImport = document.createElement("link");
+			styleImport.setAttribute("rel", "stylesheet");
+			styleImport.setAttribute("type", "text/css");
+			styleImport.setAttribute("href", "/views/" + viewId + "/style.css");
+			$("head").append(styleImport);
+
+			var viewConstructor = window[viewVarName];
+			var view = new viewConstructor("#myView");
+		}
+	});
+
+</script>

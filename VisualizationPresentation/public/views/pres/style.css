@@ -1,0 +1,62 @@
+
+/* COLORS */
+/*
+ * yellow: rgb(233,235,91)
+ * white: rgb(255,255,255)
+ * red: rgb(240,153,140)
+ * blue: rgb(46,119,197)
+ */
+
+body {
+	background-color: rgb(71,71,71);
+	margin: 20px 20px;
+	font-size: 20pt;
+}
+
+hr {
+	border-color: rgb(240,153,140);
+}
+
+/* SPAN */
+
+span.header {
+	color: rgb(240,153,140);
+	font-size: 36pt;
+	display: block;
+}
+
+span.name {
+	color: rgb(240,153,140);
+	display: inline-block;
+	width: 300px;
+	text-align: right;
+	margin-right: 15px;
+}
+
+span.value, span.value a {
+	color: rgb(255,255,255);
+}
+
+span.value a:hover {
+	text-decoration: none;
+}
+
+span.sidenote {
+	color: rgb(255,255,255);
+	font-size: 14pt;
+	margin-left: 20px;
+	opacity: .5;
+}
+
+span.sidenote a {
+	color: rgb(255,255,255);
+}
+
+span.highlight, span.highlight a {
+	color: rgb(46,119,197);
+}
+
+span.ui-icon {
+	display: inline-block;
+	vertical-position: -5px;
+}

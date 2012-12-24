@@ -1,0 +1,112 @@
+
+<html>
+
+<head>
+	<script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.address-1.4.min.js"></script>
+	<script type="text/javascript" src="/js/sigma.min.js"></script>
+	<script type="text/javascript" src="/js/underscore.js"></script>
+	<script>
+
+		// defaultEdgeType: 'curve'
+
+		sigma.publicPrototype.myTicTacToeLayout = function() {
+			var W = 5,
+				i = 0,
+				L = this.getNodesCount(),
+				numCols = Math.sqrt(L);
+
+			this.iterNodes(function(n)
+			{
+				var cell = n.attr.index;
+				var col = cell % numCols;
+				var row = Math.floor(cell/numCols);
+
+				n.x = (W / numCols) * col;
+				n.y = (W / numCols) * row;
+			});
+
+			return this.position(0,0,1).draw();
+		};
+
+		$(document).ready(function()
+		{
+			var sigRoot = document.getElementById('sigma-example');
+			var sigInst = sigma.init(sigRoot).drawingProperties({
+				defaultLabelColor: '#fff'});
+
+			$.get("http://localhost:3000/board?endNode=35",function(data)
+			{
+				var nodes = data.nodes;
+				var nodeNames = _.keys(nodes);
+
+				for (var i=0; i < nodeNames.length; i++)
+				{
+					var node = nodes[nodeNames[i]];
+//					node.x = Math.random();
+//					node.y = Math.random();
+
+					sigInst.addNode(nodeNames[i],node);
+				}
+
+				var edges = data.edges;
+				var edgeStartNodes = _.keys(edges);
+
+				for (var i=0; i < edgeStartNodes.length; i++)
+				{
+					var startNode = edgeStartNodes[i];
+					var nodeEdges = edges[startNode];
+					var endNodes = _.keys(nodeEdges);
+
+					for (var j=0; j < endNodes.length; j++)
+					{
+						var endNode = endNodes[j];
+
+						sigInst.addEdge(startNode + endNode,startNode,endNode);
+					}
+				}
+			});
+
+			sigInst.bind('downnodes',function(e)
+			{
+				sigInst.myTicTacToeLayout();
+				console.dir(e);
+			})
+
+			sigInst.draw();
+		})
+
+	</script>
+	<style type="text/css">
+			/* sigma.js context : */
+		.sigma-parent {
+			position: relative;
+			border-radius: 4px;
+			-moz-border-radius: 4px;
+			-webkit-border-radius: 4px;
+			background: #222;
+			height: 500px;
+		}
+		.sigma-expand {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+		.buttons-container{
+			padding-bottom: 8px;
+			padding-top: 12px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="span12 sigma-parent" id="sigma-example-parent">
+	<div class="sigma-expand" id="sigma-example"></div>
+</div>
+
+</body>
+
+</html>
+

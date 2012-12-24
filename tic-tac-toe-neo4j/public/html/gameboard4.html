@@ -1,0 +1,213 @@
+<html>
+
+<head>
+	<script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.address-1.4.min.js"></script>
+	<script type="text/javascript" src="/js/underscore.js"></script>
+	<script type="text/javascript" src="/js/d3.v2.js"></script>
+	<script>
+
+		var startNode;
+		var w = 960;
+		var h = 500;
+		var sqW = 50;
+		var color1 = "#FF0000";
+		var color2 = "#CCCCCC";
+		var color3 = "#CC0000";
+
+		$(document).ready(function ()
+		{
+			$("#config").show();
+			$("#board").hide();
+
+			$("#startButton").click(function(e)
+			{
+				var boardSize = $("#boardSize").val();
+
+				d3.json("/board/init?boardSize=" + boardSize,function(data)
+				{
+					startNode = data.startNode;
+
+					$("#config").hide();
+					$("#board").show();
+
+					refreshBoard();
+				});
+			});
+
+			$("#continueButton").click(function(e)
+			{
+				var gameId = $("#gameIdInput").val();
+
+				startNode = gameId;
+
+				$("#config").hide();
+				$("#board").show();
+
+				refreshBoard();
+			});
+		})
+
+		function refreshBoard()
+		{
+			$("#gameId").text('Game ID: ' + startNode);
+
+			d3.select("#main")
+					.selectAll("div")
+					.remove();
+
+			d3.json("/board?endNode=" + startNode,function(data)
+			{
+				var nodeNames = d3.keys(data.nodes);
+				var winningNodes = data.winningNodes;
+				var winningQuery = data.winningQuery;
+				var nodes = [];
+				var sqLen = Math.sqrt(nodeNames.length);
+
+				$("#queryOutput").text(winningQuery.query);
+
+				d3.select("#main")
+						.style("border-collapse", "collapse")
+						.style("border", "2px black solid")
+						.style("position","absolute")
+						.style("width",(sqLen*sqW) + "px")
+						.style("height",(sqLen*sqW) + "px")
+
+						.selectAll("div")
+						.data(nodeNames)
+						.enter()
+						.append("div")
+						.style("position","absolute")
+						.style('width',sqW + "px")
+						.style('height',sqW + "px")
+						.style('left',function(nodeName)
+						{
+							var node = data.nodes[nodeName];
+
+							return (node.index % sqLen)*sqW;
+						})
+						.style('top',function(nodeName)
+						{
+							var node = data.nodes[nodeName];
+
+							return Math.floor(node.index / sqLen)*sqW;
+						})
+						.style('background-color',function(nodeName)
+						{
+							var node = data.nodes[nodeName];
+							var isWinningNode = false;
+
+							winningNodes.forEach(function(winningNode)
+							{
+								if (winningNode == node.index)
+								{
+									isWinningNode = true;
+								}
+							});
+
+							if (isWinningNode)
+							{
+								return color3;
+							}
+
+							var row = Math.floor(node.index / sqLen);
+							var col = node.index % sqLen;
+
+							if ( (row % 2) == 0)
+							{
+								return (col % 2) == 0 ? color1 : color2;
+							}
+							else
+							{
+								return (col % 2) == 0 ? color2 : color1;
+							}
+						})
+						.text(function(nodeName)
+						{
+							var node = data.nodes[nodeName];
+
+							return node.selected == "true" ? "X" : "";
+						})
+						.on('mouseover',function(d)
+						{
+							d3.select(this).style("opacity",0.5);
+						})
+						.on('mouseout',function(d)
+						{
+							d3.select(this).style("opacity",1.0);
+						})
+						.on('click',function(nodeName)
+						{
+							var node = data.nodes[nodeName];
+
+							selectCell(node);
+						});
+			});
+
+			function selectCell(node)
+			{
+				var action = "select";
+
+				if (node.selected == "true")
+					action = "un" + action;
+
+				d3.json("/cell/" + action + "/" + node.id,function(data)
+				{
+					if (data.result == "OK")
+						refreshBoard();
+				});
+			}
+		}
+
+	</script>
+</head>
+<body style="background-color: #FFF">
+
+<h2 style="color: #F00;">Tic-Tac-Toe</h2>
+<h3 id="gameId" style="color: #003355"></h3>
+
+<div id="config">
+
+	<fieldset>
+
+		<legend>Start a new game</legend>
+
+		<div>
+			<label for="boardSize">Board Size:</label>
+			<input type="number" name="boardSize" id="boardSize" />
+		</div>
+
+		<div>
+			<button id="startButton">Start</button>
+		</div>
+
+	</fieldset>
+
+	<div style="margin-top: 10px; margin-bottom: 10px;"> OR </div>
+
+	<fieldset>
+
+		<legend>Continue an existing game</legend>
+
+		<div>
+			<label for="gameIdInput">Game Id:</label>
+			<input type="number" name="gameIdInput" id="gameIdInput" />
+		</div>
+
+		<div>
+			<button id="continueButton">Continue</button>
+		</div>
+
+	</fieldset>
+
+</div>
+
+<div id="board" style="margin-left: 100px;">
+	<div id="main"></div>
+	<div id="queryOutput" style="position: absolute; bottom: 100px;"></div>
+</div>
+
+
+</body>
+</html>
+

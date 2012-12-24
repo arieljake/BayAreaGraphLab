@@ -1,0 +1,16 @@
+{
+  "name": "bagl-tags",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node web"
+  },
+  "dependencies": {
+	"async":"*",
+  	"express": "3.0.0rc2",
+    "jade": "*",
+	"underscore":"*",
+	"underscore.string":"*",
+	"mongoskin":"*"
+  }
+}

@@ -1,0 +1,22 @@
+doctype 5
+html
+  head
+    title= title
+    meta(name="viewport",content="width=1024", initial-scale="2")
+
+    link(rel='stylesheet', href='/css/external/jquery-ui-1.9.1.mint-choc.min.css')
+
+    script(src='/js/external/require.js')
+    script(src='/js/external/require.imports.js')
+    script(src='/js/external/d3.v2.js')
+    script(src="/js/external/nv.d3.min.js")
+    script(src='/js/external/jquery-1.8.2.min.js')
+    script(src='/js/external/underscore-min.js')
+    script(src='/js/external/underscore.string.js')
+    script(src='/js/external/underscore.mixins.js')
+
+    script(type="text/javascript",src="//use.typekit.net/rbz3ysi.js")
+    script(type="text/javascript") try{Typekit.load();}catch(e){}
+
+  body
+    block content

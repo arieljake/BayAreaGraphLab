@@ -1,0 +1,23 @@
+{
+    "name":"VisPres",
+    "version":"0.0.1",
+    "private":true,
+    "scripts":{
+        "start":"node program"
+    },
+    "dependencies":{
+	    "connect-mongo":"*",
+        "express":"*",
+        "file-utils": "0.2.4",
+        "jade":"*",
+	    "mongodb": ">= 0.9.8",
+        "mongoskin":"0.3.x",
+        "socket.io": "0.9.10",
+        "underscore":"*",
+        "underscore.string":"*"
+	},
+	"engines": {
+		"node": "0.8.x",
+		"npm": "1.1.x"
+	}
+}
